@@ -1,250 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Facciones</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        padding: 20px;
-        background-color: #343a40;
-        color: #fff;
-      }
-      textarea {
-        font-size: 16px;
-        background-color: #495057;
-        color: #fff;
-      }
-      .form-select {
-        background-color: #495057;
-        color: #fff;
-      }
-      .table {
-        color: #fff;
-        background-color: #495057; /* Fondo de la tabla */
-        border-radius: 8px; /* Bordes redondeados */
-        border-collapse: separate; /* Colapso de bordes separados */
-        overflow: hidden; /* Ocultar desbordamiento */
-      }
-      .table thead th {
-        background-color: #212529;
-        border-color: #32383e;
-        color: #fff;
-        text-align: center; /* Alineación centrada del texto en encabezados */
-        font-weight: bold; /* Texto en negrita */
-      }
-      .table-striped tbody tr:nth-of-type(odd) {
-        background-color: rgba(255, 255, 255, 0.05);
-      }
-      .table-striped tbody tr:hover {
-        background-color: rgba(
-          255,
-          255,
-          255,
-          0.1
-        ); /* Cambio de color al pasar el ratón */
-      }
-      .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-      }
-      .btn-primary:hover {
-        background-color: #0069d9;
-        border-color: #0062cc;
-      }
-      #total-display {
-        color: #fff;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="mb-4">
-        <textarea
-          id="data-input"
-          class="form-control"
-          placeholder="Ingresar datos..."
-          rows="10"
-        ></textarea>
-      </div>
-
-      <div class="mb-4">
-        <button onclick="processData()" class="btn btn-primary">
-          Analizar datos
-        </button>
-      </div>
-
-      <div class="mb-4">
-        <label for="job-select" class="form-label">Seleccionar Job:</label>
-        <select id="job-select" class="form-select" onchange="filterByJob()">
-          <option value="">Seleccionar Faccion</option>
-          <option value="ambulance">SAME</option>
-          <option value="police">PDLC</option>
-          <option value="police2">PFA</option>
-          <option value="seguridad">PSG</option>
-          <option value="gendarme">GNA</option>
-          <option value="fbi">FBI</option>
-          <option value="mechanic">Mechanic1 (Bartolos Customs)</option>
-          <option value="mechanic2">Mechanic2 (WestCoast)</option>
-          <option value="mechanic3">Mechanic3 (Midnight)</option>
-          <option value="mechanic4">Mechanic4 (Montana Customs)</option>
-          <option value="mechanic5">Mechanic5 (Chambers)</option>
-          <option value="taxi">Taxi</option>
-          <option value="transito">Transito</option>
-        </select>
-      </div>
-
-      <div class="mb-4">
-        <label for="job-search" class="form-label">Buscar por Job:</label>
-        <input
-          type="text"
-          id="job-search"
-          class="form-control"
-          placeholder="Escriba el job a buscar..."
-          oninput="filterBySearch()"
-        />
-      </div>
-
-      <div class="mb-4" id="total-display">
-        Total: <span id="total-count">0</span>
-      </div>
-
-      <div class="table-responsive">
-        <table id="data-table" class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>JOB</th>
-            </tr>
-          </thead>
-          <tbody id="table-body"></tbody>
-        </table>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facciones</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+      background-color: #343a40;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    textarea, .form-select, .form-control {
+      background-color: #495057;
+      color: #fff;
+      border: 1px solid #495057;
+    }
+    .form-select:focus, .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    }
+    .table-container {
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    .table {
+      color: #fff;
+      background-color: #495057;
+      border-collapse: collapse;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table th, .table td {
+      padding: 12px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #495057;
+    }
+    .table th {
+      background-color: #212529;
+      color: #fff;
+      font-weight: bold;
+    }
+    .table tbody tr:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    .table tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+    #total-display {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="my-4">
+      <textarea id="data-input" class="form-control" placeholder="Ingresar datos..." rows="10"></textarea>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <div class="my-4">
+      <button onclick="processData()" class="btn btn-primary">Analizar datos</button>
+    </div>
 
-    <script>
-      let originalRows = [];
+    <div class="my-4">
+      <label for="job-select" class="form-label">Seleccionar Job:</label>
+      <select id="job-select" class="form-select" onchange="filterByJob()">
+        <option value="">Seleccionar Faccion</option>
+        <option value="ambulance">SAME</option>
+        <option value="police">PDLC</option>
+        <option value="police2">PFA</option>
+        <option value="seguridad">PSG</option>
+        <option value="gendarme">GNA</option>
+        <option value="fbi">FBI</option>
+        <option value="mechanic">Mechanic1 (Bartolos Customs)</option>
+        <option value="mechanic2">Mechanic2 (WestCoast)</option>
+        <option value="mechanic3">Mechanic3 (Midnight)</option>
+        <option value="mechanic4">Mechanic4 (Montana Customs)</option>
+        <option value="mechanic5">Mechanic5 (Chambers)</option>
+        <option value="taxi">Taxi</option>
+        <option value="transito">Transito</option>
+      </select>
+    </div>
 
-      function processData() {
-        const dataInput = document.getElementById("data-input").value.trim();
+    <div class="my-4">
+      <label for="job-search" class="form-label">Buscar por Job:</label>
+      <input type="text" id="job-search" class="form-control" placeholder="Escriba el job a buscar..." oninput="filterBySearch()">
+    </div>
 
-        const lines = dataInput.split("\n");
+    <div class="my-4" id="total-display">
+      <h5>Total: <span id="total-count">0</span></h5>
+    </div>
 
-        document.getElementById("table-body").innerHTML = "";
+    <div class="table-container">
+      <table id="data-table" class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>JOB</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </div>
 
-        let rowsHtml = "";
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-        lines.forEach((line, index) => {
-          if (index === 0) return;
-          const columns = line.split("\t").map((column) => column.trim());
-          const newRow = `
-                <tr>
-                    <td>${columns[0]}</td>
-                    <td>${columns[1]}</td>
-                    <td>${columns[2]}</td>
-                </tr>
-            `;
+  <script>
+    let originalRows = [];
 
-          rowsHtml += newRow;
+    function processData() {
+      const dataInput = document.getElementById("data-input").value.trim();
+      const lines = dataInput.split("\n");
+      document.getElementById("table-body").innerHTML = "";
 
-          originalRows.push({
-            id: columns[0],
-            name: columns[1],
-            job: columns[2],
-          });
-        });
+      let rowsHtml = "";
 
-        document.getElementById("table-body").innerHTML = rowsHtml;
+      lines.forEach((line, index) => {
+        if (index === 0) return;
+        const columns = line.split("\t").map(column => column.trim());
+        const newRow = `
+          <tr>
+            <td>${columns[0]}</td>
+            <td>${columns[1]}</td>
+            <td>${columns[2]}</td>
+          </tr>
+        `;
+        rowsHtml += newRow;
+        originalRows.push({ id: columns[0], name: columns[1], job: columns[2] });
+      });
 
-        updateTotalDisplay();
-      }
+      document.getElementById("table-body").innerHTML = rowsHtml;
+      updateTotalDisplay();
+    }
 
-      function isAllowedJob(job) {
-        const allowedJobs = new Set([
-          "ambulance",
-          "police",
-          "police2",
-          "seguridad",
-          "gendarme",
-          "fbi",
-          "mechanic",
-          "mechanic2",
-          "mechanic3",
-          "mechanic4",
-          "mechanic5",
-          "taxi",
-          "transito",
-        ]);
-        return allowedJobs.has(job.toLowerCase());
-      }
+    function isAllowedJob(job) {
+      const allowedJobs = new Set([
+        "ambulance", "police", "police2", "seguridad", "gendarme",
+        "fbi", "mechanic", "mechanic2", "mechanic3", "mechanic4",
+        "mechanic5", "taxi", "transito"
+      ]);
+      return allowedJobs.has(job.toLowerCase());
+    }
 
-      function filterByJob() {
-        const selectedJob = document
-          .getElementById("job-select")
-          .value.toLowerCase();
+    function filterByJob() {
+      const selectedJob = document.getElementById("job-select").value.toLowerCase();
+      const rows = document.querySelectorAll("#table-body tr");
+      document.getElementById("table-body").innerHTML = "";
 
-        const rows = document.querySelectorAll("#table-body tr");
+      let filteredRowsHtml = "";
 
-        document.getElementById("table-body").innerHTML = "";
+      originalRows.forEach(row => {
+        if (isAllowedJob(row.job) && (selectedJob === "" || row.job.toLowerCase() === selectedJob)) {
+          filteredRowsHtml += `
+            <tr>
+              <td>${row.id}</td>
+              <td>${row.name}</td>
+              <td>${row.job}</td>
+            </tr>
+          `;
+        }
+      });
 
-        let filteredRowsHtml = "";
+      document.getElementById("table-body").innerHTML = filteredRowsHtml;
+      updateTotalDisplay();
+    }
 
-        originalRows.forEach((row) => {
-          if (
-            isAllowedJob(row.job) &&
-            (selectedJob === "" || row.job.toLowerCase() === selectedJob)
-          ) {
-            filteredRowsHtml += `
-              <tr>
-                <td>${row.id}</td>
-                <td>${row.name}</td>
-                <td>${row.job}</td>
-              </tr>
-            `;
-          }
-        });
+    function filterBySearch() {
+      const searchValue = document.getElementById("job-search").value.trim().toLowerCase();
+      const rows = document.querySelectorAll("#table-body tr");
 
-        document.getElementById("table-body").innerHTML = filteredRowsHtml;
+      rows.forEach(row => {
+        const jobCell = row.querySelector("td:nth-child(3)").textContent.toLowerCase();
+        row.style.display = jobCell.includes(searchValue) ? "" : "none";
+      });
 
-        updateTotalDisplay();
-      }
+      updateTotalDisplay();
+    }
 
-      function filterBySearch() {
-        const searchValue = document
-          .getElementById("job-search")
-          .value.trim()
-          .toLowerCase();
+    function updateTotalDisplay() {
+      const visibleRows = document.querySelectorAll("#table-body tr");
+      let count = 0;
 
-        const rows = document.querySelectorAll("#table-body tr");
+      visibleRows.forEach(row => {
+        if (row.style.display !== "none") count++;
+      });
 
-        rows.forEach((row) => {
-          const jobCell = row
-            .querySelector("td:nth-child(3)")
-            .textContent.toLowerCase();
-          if (jobCell.includes(searchValue)) {
-            row.style.display = "";
-          } else {
-            row.style.display = "none";
-          }
-        });
-
-        updateTotalDisplay();
-      }
-
-      function updateTotalDisplay() {
-        const visibleRows = document.querySelectorAll(
-          "#table-body tr[style='']:not(.filtered-out)"
-        );
-        document.getElementById("total-count").textContent = visibleRows.length;
-      }
-    </script>
-  </body>
+      document.getElementById("total-count").textContent = count;
+    }
+  </script>
+</body>
 </html>
