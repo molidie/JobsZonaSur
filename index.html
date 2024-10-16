@@ -1,149 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Facciones</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        padding: 20px;
-        background-color: #212529;
-        color: #f8f9fa;
-        font-family: "Roboto", sans-serif;
-      }
-      textarea,
-      .form-select,
-      .form-control {
-        background-color: #343a40;
-        color: #f8f9fa;
-        border: 1px solid #495057;
-      }
-      .form-select:focus,
-      .form-control:focus {
-        border-color: #0d6efd;
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-      }
-      .table-container {
-        margin-top: 20px;
-        overflow-x: auto;
-      }
-      .table {
-        color: #f8f9fa;
-        background-color: #343a40;
-        border-collapse: collapse;
-        width: 100%;
-        border-radius: 8px;
-        overflow: hidden;
-      }
-      .table th,
-      .table td {
-        padding: 12px;
-        text-align: center;
-        vertical-align: middle;
-        border: 1px solid #495057;
-      }
-      .table th {
-        background-color: #495057;
-        color: #f8f9fa;
-        font-weight: bold;
-      }
-      .table tbody tr:nth-child(odd) {
-        background-color: #2c3034;
-      }
-      .table tbody tr:hover {
-        background-color: #3e444a;
-      }
-      .btn-primary {
-        background-color: #0d6efd;
-        border-color: #0d6efd;
-        transition: background-color 0.3s, border-color 0.3s;
-      }
-      .btn-primary:hover {
-        background-color: #0b5ed7;
-        border-color: #0a58ca;
-      }
-      #total-display {
-        color: #f8f9fa;
-      }
-      .form-label {
-        font-weight: 700;
-      }
-      /* Toast Custom Style */
-      .toast-container {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1050;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="my-4">
-        <textarea
-          id="data-input"
-          class="form-control"
-          placeholder="Ingresar datos..."
-          rows="10"
-        ></textarea>
-      </div>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facciones</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #f8f9fa;
+      font-family: "Roboto", sans-serif;
+    }
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1 {
+      color: #0d6efd;
+    }
+    textarea, .form-select, .form-control {
+      background-color: #2a2a2a;
+      color: #f8f9fa;
+      border: 1px solid #4a4a4a;
+      border-radius: 8px;
+    }
+    .form-select:focus, .form-control:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    .btn-primary {
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+      transition: all 0.3s;
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+    .table-container {
+      margin-top: 30px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table {
+      background-color: #2a2a2a;
+      color: #f8f9fa;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table th, .table td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #3c3c3c;
+    }
+    .table th {
+      background-color: #444;
+      font-weight: bold;
+    }
+    .table tbody tr:nth-child(odd) {
+      background-color: #343a40;
+    }
+    .table tbody tr:hover {
+      background-color: #464e54;
+    }
+    #total-display {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #f8f9fa;
+      text-align: right;
+    }
+    .form-label {
+      font-weight: 700;
+      color: #0d6efd;
+    }
+    /* Estilo mejorado para la sección de staff online */
+    #staff-online {
+      background-color: #0d6efd;
+      border-radius: 8px;
+      padding: 20px;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    #staff-online h5 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
 
-      <div class="my-4">
-        <button onclick="processData()" class="btn btn-primary">
-          Analizar datos
-        </button>
-      </div>
+<body>
+  <div class="container">
+    <h1>Panel de Facciones</h1>
 
+    <!-- Sección mejorada para mostrar staff online -->
+    <div id="staff-online" class="text-center my-4">
+      <h5>Staff Online: <span id="staff-count">0</span></h5>
+    </div>
+
+    <div class="my-4">
+      <textarea id="data-input" class="form-control" placeholder="Ingresar datos..." rows="8"></textarea>
+    </div>
+
+    <div class="text-center my-4">
+      <button onclick="processData()" class="btn btn-primary">Analizar datos</button>
+    </div>
+
+    <div id="data-section" style="display: none;">
       <div class="my-4">
-        <label for="job-select" class="form-label">Seleccionar Job:</label>
+        <label for="job-select" class="form-label">Seleccionar Facción:</label>
         <select id="job-select" class="form-select" onchange="filterByJob()">
-          <option value="">Seleccionar Faccion</option>
+          <option value="">Seleccionar Facción</option>
           <option value="ambulance">SAME</option>
           <option value="police">PDLC</option>
-          <option value="police2">PFA</option>
           <option value="seguridad">PSG</option>
           <option value="gendarme">GNA</option>
-          <option value="fbi">FBI</option>
-          <option value="mechanic">Mechanic1 (Bartolos Customs)</option>
-          <option value="mechanic2">Mechanic2 (WestCoast)</option>
-          <option value="mechanic3">Mechanic3 (Midnight)</option>
-          <option value="mechanic4">Mechanic4 (Montana Customs)</option>
-          <option value="mechanic5">Mechanic5 (Chambers)</option>
+          <option value="mechanic">Mechanic1</option>
+          <option value="mechanic2">Mechanic2</option>
+          <option value="mechanic3">Mechanic3</option>
+          <option value="mechanic4">Mechanic4</option>
+          <option value="mechanic5">Mechanic5</option>
           <option value="taxi">Taxi</option>
-          <option value="transito">Transito</option>
         </select>
       </div>
-
+    
       <div class="my-4">
-        <label for="job-search" class="form-label">Buscar por Job:</label>
-        <input
-          type="text"
-          id="job-search"
-          class="form-control"
-          placeholder="Escriba el job a buscar..."
-          oninput="filterBySearch()"
-        />
+        <label for="job-search" class="form-label">Buscar por Facción:</label>
+        <input type="text" id="job-search" class="form-control" placeholder="Escriba la facción a buscar..." oninput="filterBySearch()" />
       </div>
-
-      <div class="my-4" id="total-display">
+    
+      <div id="total-display">
         <h5>Total: <span id="total-count">0</span></h5>
       </div>
-
+    
       <div class="table-container">
-        <table id="data-table" class="table table-striped table-hover">
+        <table id="data-table" class="table table-hover">
           <thead>
             <tr>
               <th>ID</th>
-              <th>NAME</th>
-              <th>JOB</th>
+              <th>Nombre</th>
+              <th>Facción</th>
             </tr>
           </thead>
           <tbody id="table-body"></tbody>
@@ -151,34 +153,31 @@
       </div>
     </div>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toast-container"></div>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <script>
       let originalRows = [];
 
-      function processData() {
+      async function processData() {
         const dataInput = document.getElementById("data-input").value.trim();
         const lines = dataInput.split("\n");
         document.getElementById("table-body").innerHTML = "";
 
         let rowsHtml = "";
 
-        originalRows = []; // Reset the originalRows array
+        originalRows = [];
 
         lines.forEach((line, index) => {
           if (index === 0) return;
           const columns = line.split("\t").map((column) => column.trim());
           const newRow = `
-          <tr>
-            <td>${columns[0]}</td>
-            <td>${columns[1]}</td>
-            <td>${columns[2]}</td>
-          </tr>
-        `;
+            <tr>
+              <td>${columns[0]}</td>
+              <td>${columns[1]}</td>
+              <td>${columns[2]}</td>
+            </tr>
+          `;
           rowsHtml += newRow;
           originalRows.push({
             id: columns[0],
@@ -190,84 +189,34 @@
         document.getElementById("table-body").innerHTML = rowsHtml;
         updateTotalDisplay();
 
-        // Send police data after a delay of 5 seconds
-        setTimeout(sendPoliceData, 5000);
+        // Mostrar la sección oculta
+        document.getElementById("data-section").style.display = "block";
+
+        // Llamar a la función para obtener staff online
+        getStaffOnline();
       }
 
-      function delay(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-      }
+      async function getStaffOnline() {
+        try {
+          const response = await fetch(
+            "https://servers-frontend.fivem.net/api/servers/single/9lmk5y"
+          );
+          const data = await response.json();
 
-      async function sendPoliceData() {
-        const rows = document.querySelectorAll("#table-body tr");
-        const url =
-          "https://discord.com/api/webhooks/1270735884865634384/P_G8PbzPq6PtKtFRWi8VymXr3wsWm0b2HVs55M0Ihftcak2WuD4ODmJ8R29A4Ngf4-X-";
+          // Filtrar los jugadores que son staff (aquellos cuyos nombres empiezan con "^")
+          const staffCount = data.Data.players.filter((player) =>
+            player.name.startsWith("^")
+          ).length;
 
-        for (let row of rows) {
-          const columns = row.querySelectorAll("td");
-          const steamId = columns[0].innerText.trim();
-          const steamName = columns[1].innerText.trim();
-          const job = columns[2].innerText.trim();
-
-          if (isAllowedJob(job)) {
-            console.log(
-              `Enviando registro ID: ${steamId}, Steam: ${steamName}`
-            );
-
-            try {
-              const response = await fetch(url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  embeds: [
-                    {
-                      title: "Policia de la Ciudad Registro",
-                      description: `**ID:** ${steamId}\n**Steam:** ${steamName}\n**Hora:** ${new Date().toLocaleTimeString()}`,
-                      footer: {
-                        text: `Registro de actividades • hoy a las ${new Date().toLocaleTimeString()}`,
-                      },
-                      color: 0x00ff00, // Color verde fluor
-                    },
-                  ],
-                }),
-              });
-
-              if (!response.ok) {
-                if (response.status === 429) {
-                  const retryAfter = response.headers.get("Retry-After");
-                  console.error(
-                    `Error 429: Rate limit alcanzado. Esperando ${retryAfter} ms antes de reintentar.`
-                  );
-                  await delay(retryAfter * 1000); // Convertimos segundos a milisegundos
-                } else {
-                  console.error(
-                    `Error al enviar registro ID: ${steamId}, Steam: ${steamName}. Estado: ${response.status}`
-                  );
-                }
-              } else {
-                console.log(
-                  `Registro ID: ${steamId}, Steam: ${steamName} enviado con éxito.`
-                );
-              }
-            } catch (error) {
-              console.error(
-                `Error de red al enviar registro ID: ${steamId}, Steam: ${steamName}.`,
-                error
-              );
-            }
-
-            // Agregar un pequeño retraso antes de enviar el siguiente registro
-            await delay(500); // 500 ms de retraso entre cada solicitud
-          }
+          // Actualizar el contenido del HTML con el número de staff online
+          document.getElementById("staff-count").textContent = staffCount;
+        } catch (error) {
+          console.error("Error al obtener la información del servidor:", error);
         }
-
-        showToast("Los datos fueron enviados correctamente a Dieglock 2.0");
       }
 
       function filterByJob() {
-        const selectedJob = document
-          .getElementById("job-select")
-          .value.toLowerCase();
+        const selectedJob = document.getElementById("job-select").value.toLowerCase();
         const rows = document.querySelectorAll("#table-body tr");
         document.getElementById("table-body").innerHTML = "";
 
@@ -279,12 +228,12 @@
             (selectedJob === "" || row.job.toLowerCase() === selectedJob)
           ) {
             filteredRowsHtml += `
-            <tr>
-              <td>${row.id}</td>
-              <td>${row.name}</td>
-              <td>${row.job}</td>
-            </tr>
-          `;
+              <tr>
+                <td>${row.id}</td>
+                <td>${row.name}</td>
+                <td>${row.job}</td>
+              </tr>
+            `;
           }
         });
 
@@ -293,69 +242,52 @@
       }
 
       function filterBySearch() {
-        const searchValue = document
-          .getElementById("job-search")
-          .value.trim()
-          .toLowerCase();
+        const searchQuery = document.getElementById("job-search").value.toLowerCase();
         const rows = document.querySelectorAll("#table-body tr");
+        document.getElementById("table-body").innerHTML = "";
 
-        rows.forEach((row) => {
-          const jobCell = row
-            .querySelector("td:nth-child(3)")
-            .textContent.toLowerCase();
-          row.style.display = jobCell.includes(searchValue) ? "" : "none";
+        let filteredRowsHtml = "";
+
+        originalRows.forEach((row) => {
+          if (
+            isAllowedJob(row.job) &&
+            (searchQuery === "" || row.job.toLowerCase().includes(searchQuery))
+          ) {
+            filteredRowsHtml += `
+              <tr>
+                <td>${row.id}</td>
+                <td>${row.name}</td>
+                <td>${row.job}</td>
+              </tr>
+            `;
+          }
         });
 
+        document.getElementById("table-body").innerHTML = filteredRowsHtml;
         updateTotalDisplay();
-      }
-
-      function updateTotalDisplay() {
-        const visibleRows = document.querySelectorAll("#table-body tr");
-        const totalCount = visibleRows.length;
-        document.getElementById("total-count").textContent = totalCount;
-      }
-
-      function showToast(message) {
-        const toastContainer = document.getElementById("toast-container");
-        const toast = document.createElement("div");
-        toast.className =
-          "toast align-items-center text-white bg-success border-0";
-        toast.role = "alert";
-        toast.ariaLive = "assertive";
-        toast.ariaAtomic = "true";
-
-        toast.innerHTML = `
-        <div class="d-flex">
-          <div class="toast-body">${message}</div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      `;
-
-        toastContainer.appendChild(toast);
-
-        const bootstrapToast = new bootstrap.Toast(toast, { delay: 3000 });
-        bootstrapToast.show();
-
-        toast.addEventListener("hidden.bs.toast", () => {
-          toast.remove();
-        });
       }
 
       function isAllowedJob(job) {
         const allowedJobs = [
           "ambulance",
           "police",
-          "police2",
           "seguridad",
           "gendarme",
-          "mechanic",
+          "mechanic1",
           "mechanic2",
           "mechanic3",
           "mechanic4",
           "mechanic5",
+          "taxi",
         ];
         return allowedJobs.includes(job.toLowerCase());
       }
+
+      function updateTotalDisplay() {
+        const rowCount = document.querySelectorAll("#table-body tr").length;
+        document.getElementById("total-count").textContent = rowCount;
+      }
     </script>
-  </body>
+  </div>
+</body>
 </html>
